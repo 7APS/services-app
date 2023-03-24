@@ -87,7 +87,7 @@ export default function HeaderDiv(props) {
       >
         <Menu.Item key="profile-view">
           {/* <Link href="/profile">Perfil</Link> */} 
-          <a href="/profile">Perfil</a> 
+          Perfil
           {/* @TODO o a com href fica muito mais lento do que o Link do next, entender pq o menu.item nao aceita o link... */}
         </Menu.Item>
         <Menu.Item key="logout">
