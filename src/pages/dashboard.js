@@ -6,8 +6,6 @@ import ProgressBar from '../components/home/ProgressBar';
 import GradientProgess from '../components/home/GradientProgess';
 import Barchart from '../components/home/Barchart';
 
-import user1 from '../static/images/user1.png';
-import user2 from '../static/images/user2.png';
 import sale from '../static/images/icon-sale.png';
 import order from '../static/images/icon-order.png';
 import user from '../static/images/icon-user.png';
@@ -15,7 +13,6 @@ import visitor from '../static/images/icon-visitor.png';
 
 export default function Dashboard() {
     return <div>
-
         {/* <!--Stats view --> */}
         <Row gutter={16}>
             <Col xs={24} sm={12} lg={6} className="custom-statcards">

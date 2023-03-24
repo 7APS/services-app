@@ -44,7 +44,7 @@ export default function Layouts(props) {
                             </div>
                         </Link>
                     </Menu.Item>
-                    <Menu.Item key="1">
+                    <Menu.Item key="2">
                         <Link href="/schedule">
                             <div>
                                 <ScheduleOutlined />
@@ -52,7 +52,7 @@ export default function Layouts(props) {
                             </div>
                         </Link>
                     </Menu.Item>
-                    <Menu.Item key="1">
+                    <Menu.Item key="3">
                         <Link href="/contact">
                             <div>
                                 <UserSwitchOutlined />
