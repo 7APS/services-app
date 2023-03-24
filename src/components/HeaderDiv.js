@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'next/link';
+import Image from 'next/image'
 import { Menu, Input, Avatar } from 'antd';
 
 // import logo from '../../public/images/7aps.png';
@@ -8,15 +9,29 @@ import logo from '../static/images/logo.png';
 import avatar from '../static/images/flat-avatar.png';
 
 const SubMenu = Menu.SubMenu;
-const Search = Input.Search;
 
 export default function HeaderDiv(props) {
-  // const [current, setCurrent] = useState('search');
+  const [currentSearch, setCurrentSearch] = useState('');
 
-  // const handleClick = e => {
-  //   console.log('click ', e);
-  //   setCurrent(e.key)
-  // };
+  const handleChange = e => {
+    setCurrentSearch(e?.target?.value)
+  };
+
+  function renderLogo() {
+    return (
+      // <Link href="/dashboard">
+        <div>
+          <Image
+            className="m-r-5"
+            src={logo}
+            alt="Logo"
+            priority
+          />
+          <a>SESA Talkes</a>
+        </div>
+    )
+    {/* </Link> */}
+  }
 
   return (
     <Menu
@@ -25,15 +40,17 @@ export default function HeaderDiv(props) {
       className="d-flex align-items-center custom-navigation"
     >
       <Menu.Item key="brand-logo" className="brand-logo">
-          <div>
-        {/* <Link href="/dashboard"> */}
-            <image src={logo} className="m-r-5" />
-            <span>SESA Talkes</span>
-        {/* </Link> */}
-          </div>
+        <div>
+          {renderLogo()}
+        </div>
       </Menu.Item>
       <Menu.Item key="search" className="custom-search auto">
-        <Search onSearch={value => console.log(value)} />
+        <div class="search-container">
+          <div class="icon-container">
+            <i class="fa fa-search"></i>
+          </div>
+          <input type="text" placeholder="Pesquisar" value={currentSearch} onChange={handleChange} />
+        </div>
       </Menu.Item>
       {/* <Menu.Item key="sidebar-toggle" onClick={this.sidebarToggle}>
           <span>LTR/RTR</span>
@@ -56,15 +73,22 @@ export default function HeaderDiv(props) {
         key="profile"
         title={
           <span>
-            <Avatar size={24} src={avatar} />
+            <Image
+              src={avatar}
+              alt="Next.js Logo"
+              width={30}
+              height={30}
+              priority
+            />
             <span> Perfil</span>
           </span>
         }
         className=""
       >
         <Menu.Item key="profile-view">
-          {/* <Link href="/profile">Perfil</Link> */}
+          {/* <Link href="/profile">Perfil</Link> */} 
           Perfil
+          {/* @TODO o a com href fica muito mais lento do que o Link do next, entender pq o menu.item nao aceita o link... */}
         </Menu.Item>
         <Menu.Item key="logout">
           {/* <Link href="/">Logout</Link> */}
