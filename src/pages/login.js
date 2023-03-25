@@ -37,7 +37,7 @@ export default function Login() {
     };
 
     const login = () => {
-        Cookies.set('user', { login: 'true', email });
+        Cookies.set('user', `{login:true,email:${email}}`);
         router.push('dashboard')
     }
 
