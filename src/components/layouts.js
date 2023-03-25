@@ -1,15 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link'
-import HeaderDiv from './HeaderDiv';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/router'
 import { Layout, Menu } from 'antd';
 import { DashboardOutlined, MenuFoldOutlined, ScheduleOutlined, MenuUnfoldOutlined, UserSwitchOutlined } from '@ant-design/icons';
+
+import HeaderDiv from './HeaderDiv';
 
 const { Header, Sider, Content } = Layout;
 
 export default function Layouts(props) {
     const [collapsed, setCollapsed] = useState(true);
+    const [canRender, setCanRender] = useState(false);
     const [openKeys, setOpenKeys] = useState('');
     const rootSubmenuKeys = ['sub1', 'sub2', 'sub4', 'sub5', 'sub3', 'sub6'];
+    const router = useRouter()
+
+    useEffect(() => {
+        const user = Cookies.get('user');
+        if (user === "null" || user == null) {
+            router.push('/');
+        } else {
+            setCanRender(true);
+        }
+    }, []);
 
     const toggle = () => {
         setCollapsed(!collapsed);
@@ -26,7 +40,7 @@ export default function Layouts(props) {
 
     const active = props.active;
 
-    return (
+    const renderLayout = () => (
         <Layout className={`${props.classname}`} >
             <Sider trigger={null} collapsible collapsed={collapsed} style={{ background: '#fff' }} className="sidebar-left">
                 <div className="logo" />
@@ -95,5 +109,11 @@ export default function Layouts(props) {
             </Layout>
         </Layout>
     );
+
+    return (
+        <>
+            {canRender && renderLayout()}
+        </>
+    )
 
 }
