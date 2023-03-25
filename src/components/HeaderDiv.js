@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { Link } from 'next/link';
 import Image from 'next/image'
-import { Menu, Input, Avatar } from 'antd';
+import { Menu } from 'antd';
+import { useRouter } from 'next/router'
 
-// import logo from '../../public/images/7aps.png';
-// import avatar from '../../public/images/flat-avatar.png';
 import logo from '../static/images/logo.png';
 import avatar from '../static/images/flat-avatar.png';
+import Cookies from 'js-cookie';
 
 const SubMenu = Menu.SubMenu;
 
 export default function HeaderDiv(props) {
   const [currentSearch, setCurrentSearch] = useState('');
+  const router = useRouter()
 
   const handleChange = e => {
     setCurrentSearch(e?.target?.value)
@@ -20,17 +21,17 @@ export default function HeaderDiv(props) {
   function renderLogo() {
     return (
       // <Link href="/dashboard">
-        <div>
-          <Image
-            className="m-r-5"
-            src={logo}
-            alt="Logo"
-            priority
-          />
-          <a>SESA Talkes</a>
-        </div>
+      <div>
+        <Image
+          className="m-r-5"
+          src={logo}
+          alt="Logo"
+          priority
+        />
+        <a>SESA Talkes</a>
+      </div>
     )
-    {/* </Link> */}
+    {/* </Link> */ }
   }
 
   return (
@@ -85,13 +86,11 @@ export default function HeaderDiv(props) {
         }
         className=""
       >
-        <Menu.Item key="profile-view">
-          {/* <Link href="/profile">Perfil</Link> */} 
+        <Menu.Item key="profile-view" onClick={() => { router.push('profile') }}>
           Perfil
           {/* @TODO o a com href fica muito mais lento do que o Link do next, entender pq o menu.item nao aceita o link... */}
         </Menu.Item>
-        <Menu.Item key="logout">
-          {/* <Link href="/">Logout</Link> */}
+        <Menu.Item key="logout" onClick={() => { router.push('/'); Cookies.set('user', null); }}>
           Logout
         </Menu.Item>
       </SubMenu>
