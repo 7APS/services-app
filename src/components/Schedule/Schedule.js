@@ -6,9 +6,9 @@ import {
     generateAppointments,
     // appointments,
 } from './data.js';
-import ResourceCell from './ResourceCell.js';
-import Appointment from './Appointment.js';
-import AppointmentTooltip from './AppointmentTooltip.js';
+// import ResourceCell from './ResourceCell.js';
+// import Appointment from './Appointment.js';
+// import AppointmentTooltip from './AppointmentTooltip.js';
 
 const currentDate = new Date();
 

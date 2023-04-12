@@ -1,5 +1,5 @@
 import Layouts from "@/components/layouts"
-import ScheduleTeste from "@/components/Schedule/Shchedule";
+import ScheduleTeste from "@/components/Schedule/Schedule";
 import { Badge, Calendar, Card } from 'antd';
 
 // ideias:
