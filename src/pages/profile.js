@@ -1,7 +1,7 @@
 import Layouts from "@/components/layouts"
 
 export default function Profile() {
-    return <div>Profile</div>
+    return <div><h1>Profile</h1></div>
 }
 
 Profile.getLayout = function getLayout(page) {
