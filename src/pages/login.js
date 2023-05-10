@@ -35,7 +35,7 @@ export default function Login() {
             setErrors({ password: "Preencha a senha!" })
             error = true;
         }
-        if (password != "admncloud" || username != "administrador@cloud.com") {
+        if (password != "12345" || username != "administrador@cloud.com") {
             setErrors({ username: "Email ou Senha invalido!", password: "Email ou Senha invalido!" })
             error = true;
         }
@@ -54,24 +54,26 @@ export default function Login() {
         try {
             const response = await fetch('https://spring-boot-webhook-whatsapp.herokuapp.com/api/login', {
                 method: 'POST',
+                headers: {
+                    "content-type": "application/json"
+                },
                 body: JSON.stringify({
-                    "login": formData.username,
+                    "email": formData.username,
                     "password": formData.password
                 })
             });
 
             if (response.ok) {
-                router.push('dashboard');
+                const ret = await response.json();
+                Cookies.set('token', ret?.token);
+                localStorage.setItem("token", ret?.token);
                 Cookies.set('user', { login: 'true', username: formData.username });
+                router.push('dashboard');
             } else {
                 throw new Error('Erro ao fazer login');
             }
         } catch (error) {
             console.error(error);
-
-            router.push('dashboard');
-            Cookies.set('user', { login: 'true', username: formData.username });
-
         }
     };
 
