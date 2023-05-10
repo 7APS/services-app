@@ -3904,7 +3904,7 @@ span.ant-radio + * {
   margin-right: 0;
   margin-left: 0;
   zoom: 1;
-  display: block;
+  // display: block; @TODO review
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
