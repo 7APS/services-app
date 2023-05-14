@@ -11,7 +11,7 @@ import {
 } from 'antd';
 import Link from 'next/link';
 
-export default function StyledForm({ data, rows, backPath }) {
+export default function StyledForm({ data, rows, backPath, handleSave, handleChange }) {
 
     function renderRows() {
         return (
@@ -20,10 +20,19 @@ export default function StyledForm({ data, rows, backPath }) {
                     return (
                         <Form.Item label={row.label}>
                             {row.type === "input" &&
-                                <Input placeholder={row.placeholder} value={data[row.name]} />
+                                <Input
+                                    key={`form-input-key-${row.name}`}
+                                    placeholder={row.placeholder}
+                                    value={data[row.name]}
+                                    onChange={(e) => handleChange(row.name, e.target.value)}
+                                />
                             }
                             {row.type === "switch" &&
-                                <Switch checked={data[row.name]} />
+                                <Switch
+                                    key={`form-input-key-${row.name}`}
+                                    checked={data[row.name]}
+                                    onChange={(e) => handleChange(row.name, e)}
+                                />
                             }
                         </Form.Item>
                     )
@@ -48,7 +57,7 @@ export default function StyledForm({ data, rows, backPath }) {
             {renderRows()}
             <Form.Item>
                 <Button><Link href={`/${backPath}`} legacyBehavior><a>Voltar</a></Link></Button>
-                <Button>Salvar</Button>
+                <Button onClick={handleSave}>Salvar</Button>
             </Form.Item>
         </Form>
     );

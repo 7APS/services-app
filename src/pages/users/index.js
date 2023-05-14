@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Layouts from "@/components/layouts";
-import { Card, Table } from 'antd';
+import { Card, Table, Button } from 'antd';
 import Link from 'next/link';
 import useSWR from 'swr'
 import { baseURL, headerValue, fetcher } from '../api';
@@ -9,7 +9,7 @@ export default function Users() {
     const [filteredInfo, setFilteredInfo] = useState({});
     const [sortedInfo, setSortedInfo] = useState({});
 
-    const { data, error, isLoading } = useSWR([baseURL, headerValue], fetcher);
+    const { data, error, isLoading } = useSWR([`${baseURL}/users`, headerValue], fetcher);
 
     const handleChange = (pagination, filters, sorter) => {
         console.log('Various parameters', pagination, filters, sorter);
@@ -32,7 +32,7 @@ export default function Users() {
             // sorter: (a, b) => a.name.length - b.name.length,
             // sortOrder: sortedInfo.columnKey === 'name' ? sortedInfo.order : null,
             ellipsis: true,
-            width: 100,
+            width: 25,
         },
         {
             title: 'Email',
@@ -41,19 +41,21 @@ export default function Users() {
             // sorter: (a, b) => a.email - b.email,
             // sortOrder: sortedInfo.columnKey === 'email' ? sortedInfo.order : null,
             ellipsis: true,
-            width: 100,
+            width: 25,
         },
         {
             title: 'Ativo',
             dataIndex: 'active',
             key: 'active',
             width: 25,
+            render: ({ active }) => active ? "SIM" : "NÃO"
         },
         {
             title: 'Agendamento Ativo',
             dataIndex: 'professionalAllowsScheduling',
             key: 'professionalAllowsScheduling',
             width: 25,
+            render: ({ professionalAllowsScheduling }) => professionalAllowsScheduling ? "SIM" : "NÃO"
         },
         {
             title: 'Action',
@@ -73,6 +75,7 @@ export default function Users() {
                 onChange={handleChange}
                 scroll={{ x: 1500, y: 450, }}
             />
+            <Button><Link href={`/users/new`} legacyBehavior><a>Novo</a></Link></Button>
         </Card>
     );
 }

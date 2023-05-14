@@ -1,7 +1,7 @@
 
 import Cookies from 'js-cookie';
 
-export const baseURL = "https://spring-boot-webhook-whatsapp.herokuapp.com/api/users";
+export const baseURL = "https://spring-boot-webhook-whatsapp.herokuapp.com/api";
 
 const token = Cookies.get('token');
 
@@ -14,7 +14,21 @@ export const headerValue = {
 
 export const fetcher = (params) => {
     const [url, headerValue] = params;
-    console.log("url", url);
-    console.log("headerValue", headerValue);
-    fetch(url, headerValue).then((res) => res.json())
+    return fetch(url, headerValue).then((res) => res.json())
 };
+
+export async function sendRequest(url, { arg }) {
+    return fetch(url, {
+        method: arg?.id != null ? 'PUT' : 'POST',
+        body: JSON.stringify(arg),
+        ...headerValue,
+    }).then(res => {
+        try {
+            if (res.status !== 204) { // @TODO ajustar back para sempre vir um json !?
+                return res?.json();
+            }
+        } catch (e) {
+            return res;
+        }
+    })
+}
