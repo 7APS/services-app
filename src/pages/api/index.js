@@ -24,7 +24,7 @@ export async function sendRequest(url, { arg }) {
         ...headerValue,
     }).then(res => {
         try {
-            if (res.status !== 204) { // @TODO ajustar back para sempre vir um json !?
+            if (res.status !== 204) { // @TODO ajustar back para sempre vir um json !? no @PUT
                 return res?.json();
             }
         } catch (e) {
