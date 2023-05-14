@@ -7,6 +7,7 @@ import {
     InputNumber,
     Radio,
     Select,
+    Space,
     Switch,
 } from 'antd';
 import Link from 'next/link';
@@ -23,14 +24,14 @@ export default function StyledForm({ data, rows, backPath, handleSave, handleCha
                                 <Input
                                     key={`form-input-key-${row.name}`}
                                     placeholder={row.placeholder}
-                                    value={data[row.name]}
+                                    value={data[row.value ?? row.name]}
                                     onChange={(e) => handleChange(row.name, e.target.value)}
                                 />
                             }
                             {row.type === "switch" &&
                                 <Switch
                                     key={`form-input-key-${row.name}`}
-                                    checked={data[row.name]}
+                                    checked={data[row.value ?? row.name]}
                                     onChange={(e) => handleChange(row.name, e)}
                                 />
                             }
@@ -56,8 +57,10 @@ export default function StyledForm({ data, rows, backPath, handleSave, handleCha
         >
             {renderRows()}
             <Form.Item>
-                <Button><Link href={`/${backPath}`} legacyBehavior><a>Voltar</a></Link></Button>
-                <Button onClick={handleSave}>Salvar</Button>
+                <Space>
+                    <Button><Link href={`/${backPath}`} legacyBehavior><a>Voltar</a></Link></Button>
+                    <Button onClick={handleSave}>Salvar</Button>
+                </Space>
             </Form.Item>
         </Form>
     );
