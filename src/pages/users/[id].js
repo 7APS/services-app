@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import Layouts from "@/components/layouts";
-import { Card } from 'antd';
+import { Card, notification } from 'antd';
 import useSWR from 'swr'
 import useSWRMutation from 'swr/mutation'
 
+import Layouts from "@/components/layouts";
 import StyledForm from '@/components/Form';
 import { baseURL, headerValue, fetcher, sendRequest } from '../api';
+import { sleep } from '@/components/Utils';
 
 export default function User() {
   const router = useRouter();
@@ -19,8 +20,13 @@ export default function User() {
   }
   const { data, error, isLoading } = useSWR([url, headerValue], fetcher);
   const [newData, setNewData] = useState({});
-
   const { trigger, isMutating } = useSWRMutation(urlMutation, sendRequest, /* opções */)
+
+
+  const [api, contextHolder] = notification.useNotification();
+  const openNotificationWithIcon = (type, message, description) => {
+    api[type]({ message, description, });
+  };
 
   useEffect(() => {
     setNewData(data);
@@ -38,13 +44,17 @@ export default function User() {
       }
       const isUpdate = newData?.id ? true : false;
       const result = await trigger(objToSave, /* opções */);
+
       if (isUpdate) {
+        openNotificationWithIcon('success', 'Atualização', 'Operação realizada com sucesso!');
         router.push(`/users`);
       } else if (result.id && !isUpdate) {
+        openNotificationWithIcon('success', 'Criação', 'Operação realizada com sucesso!');
         router.push(`/users/${result?.id}`);
       }
     } catch (e) {
-      console.log("error save users/ >>", e);
+      openNotificationWithIcon('error', 'Erro', `A operação falhou! ${e?.message}`);
+      console.log("error save >> ", e);
     }
   }
 
@@ -60,6 +70,7 @@ export default function User() {
 
   return (
     <Card>
+      {contextHolder}
       <h1>Formulário do Usuário [{newData?.name}]</h1>
       {isLoading || isMutating && <p>Loading...</p>}
       {!newData && id !== "new" && <p>No data...</p>}
@@ -84,7 +95,7 @@ export default function User() {
 
 User.getLayout = function getLayout(page) {
   return (
-    <Layouts title="assets" classname="dashboard">
+    <Layouts title="assets">
       {page}
     </Layouts>
   )

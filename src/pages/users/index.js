@@ -12,7 +12,6 @@ export default function Users() {
     const { data, error, isLoading } = useSWR([`${baseURL}/users`, headerValue], fetcher);
 
     const handleChange = (pagination, filters, sorter) => {
-        console.log('Various parameters', pagination, filters, sorter);
         setFilteredInfo(filters);
         setSortedInfo(sorter);
     };
@@ -82,7 +81,7 @@ export default function Users() {
 
 Users.getLayout = function getLayout(page) {
     return (
-        <Layouts title="assets" classname="dashboard">
+        <Layouts title="assets">
             {page}
         </Layouts>
     )
