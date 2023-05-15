@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import Link from 'next/link'
 import HeaderDiv from './HeaderDiv';
 import { Layout, Menu } from 'antd';
-import { DashboardOutlined, MenuFoldOutlined, ScheduleOutlined, MenuUnfoldOutlined, UserSwitchOutlined } from '@ant-design/icons';
+import { DashboardOutlined, MenuFoldOutlined, ScheduleOutlined, MenuUnfoldOutlined, MessageOutlined, FormOutlined } from '@ant-design/icons';
+const { SubMenu } = Menu;
 
 const { Header, Sider, Content } = Layout;
 
@@ -55,11 +56,33 @@ export default function Layouts(props) {
                     <Menu.Item key="3">
                         <Link href="/contact">
                             <div>
-                                <UserSwitchOutlined />
-                                <span> Contato </span>
+                                <MessageOutlined />
+                                <span> Mensagens </span>
                             </div>
                         </Link>
                     </Menu.Item>
+                    <SubMenu
+                        key="7"
+                        title={
+                            <span>
+                                <FormOutlined />
+                                <span>Cadastros</span>
+                            </span>
+                        }
+                    >
+                        <Menu.Item key="7.1">
+                            <Link href="/users"> Usuários </Link>
+                        </Menu.Item>
+                        <Menu.Item key="7.2">
+                            <Link href="/persons"> Pessoas </Link>
+                        </Menu.Item>
+                        <Menu.Item key="7.3">
+                            <Link href="/itens"> Itens</Link>
+                        </Menu.Item>
+                        <Menu.Item key="7.4">
+                            <Link href="/company"> Empresa</Link>
+                        </Menu.Item>
+                    </SubMenu>
                 </Menu>
                 {collapsed &&
                     <MenuUnfoldOutlined className="trigger" onClick={toggle} />
@@ -87,7 +110,7 @@ export default function Layouts(props) {
                         padding: 24,
                         minHeight: '100vh',
                     }}
-                    className={collapsed ? "collapsed mainContnet " : "mainContnet"}
+                    className={collapsed ? "collapsed mainContent " : "mainContent"}
                 >
 
                     {props.children}

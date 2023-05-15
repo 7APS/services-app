@@ -17,16 +17,16 @@
 }
 
 .login {
-  .mainContnet.ant-layout-content.collapsed {
+  .mainContent.ant-layout-content.collapsed {
     margin-left: 0px !important;
   }
 
-  .mainContnet.ant-layout-content {
+  .mainContent.ant-layout-content {
     margin-top: 0px !important;
     margin-left: 0px !important;
   }
 
-  .mainContnet .layout-trigger {
+  .mainContent .layout-trigger {
     display: none;
   }
 }
@@ -207,7 +207,7 @@ header {
   }
 }
 
-.mainContnet {
+.mainContent {
   &.ant-layout-content {
     margin-top: 65px !important;
     margin-left: 200px !important;
@@ -296,7 +296,7 @@ header {
     }
   }
 
-  .mainContnet.ant-layout-content {
+  .mainContent.ant-layout-content {
     margin-right: 200px !important;
     margin-left: 0 !important;
 
@@ -328,7 +328,7 @@ header {
     }
   }
 
-  .mainContnet.ant-layout-content {
+  .mainContent.ant-layout-content {
     margin-right: -100px !important;
 
     &.collapsed {
@@ -714,6 +714,6 @@ h1 {
 .ant-layout-sider-children {
   .ant-menu-root {
     height: calc(100vh - 100px);
-    overflow: scroll;
+    // overflow: scroll; @TODO review
   }
 }

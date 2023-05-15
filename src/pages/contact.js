@@ -4,7 +4,7 @@ import LoadMore from "@/components/Loadmore"
 export default function Contact({results}) {
     return (
         <div>
-            <h1>Contato</h1>
+            <h1>Contatos</h1>
             <LoadMore results={results} />
         </div>
     );
