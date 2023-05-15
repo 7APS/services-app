@@ -7,7 +7,6 @@ import useSWRMutation from 'swr/mutation'
 import Layouts from "@/components/layouts";
 import StyledForm from '@/components/Form';
 import { baseURL, headerValue, fetcher, sendRequest } from '../api';
-import { sleep } from '@/components/Utils';
 
 export default function User() {
   const router = useRouter();
