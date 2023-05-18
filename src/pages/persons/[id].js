@@ -37,9 +37,9 @@ export default function Person() {
       const objToSave = {
         id: newData?.id ?? null,
         name: newData?.name,
-        phones: newData?.phones,
+        phones: [{ number: newData?.phones, standard: true }],
         active: newData?.active ?? false,
-        responsible: newData?.responsible,
+        responsible: { id: "f51210c6-1a0c-4369-95fa-0d6ea5b1b8ad" }, // @todo ajustar para load de users no select da tela
       }
       const isUpdate = newData?.id ? true : false;
       const result = await trigger(objToSave, /* opções */);
@@ -81,8 +81,8 @@ export default function Person() {
           handleChange={handleChange}
           rows={[
             { label: "Nome", type: "input", placeholder: "Nome", name: "name" },
-            { label: "Telefone", type: "input", placeholder: "Telefone", name: "phones", value: "data?.phones?.[0]?.number" },
-            { label: "Responsável", type: "input", placeholder: "Nome do Responsável", name: "responsible", value: "data?.responsible?.name" },
+            { label: "Telefone", type: "number", placeholder: "Telefone", name: "phones", value: "data?.phones?.[0]?.number" },
+            { label: "Responsável", type: "input", placeholder: "Nome do Responsável", name: "responsible", value: "data?.responsible?.name", disabled: true},
             { label: "Ativo", type: "switch", placeholder: "", name: "active" },
           ]}
         />
