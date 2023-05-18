@@ -47,14 +47,14 @@ export default function Users() {
             dataIndex: 'active',
             key: 'active',
             width: 25,
-            render: ({ active }) => active ? "SIM" : "NÃO"
+            render: (active) => active ? "SIM" : "NÃO"
         },
         {
             title: 'Agendamento Ativo',
             dataIndex: 'professionalAllowsScheduling',
             key: 'professionalAllowsScheduling',
             width: 25,
-            render: ({ professionalAllowsScheduling }) => professionalAllowsScheduling ? "SIM" : "NÃO"
+            render: (professionalAllowsScheduling) => professionalAllowsScheduling ? "SIM" : "NÃO"
         },
         {
             title: 'Action',
