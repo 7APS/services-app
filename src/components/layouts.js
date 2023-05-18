@@ -77,7 +77,7 @@ export default function Layouts(props) {
                             <Link href="/persons"> Pessoas </Link>
                         </Menu.Item>
                         <Menu.Item key="7.3">
-                            <Link href="/itens"> Itens</Link>
+                            <Link href="/items"> Items</Link>
                         </Menu.Item>
                         <Menu.Item key="7.4">
                             <Link href="/company"> Empresa</Link>
