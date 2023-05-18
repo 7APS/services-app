@@ -37,7 +37,7 @@ export default function Persons() {
             key: 'phones',
             ellipsis: true,
             width: 25,
-            render: (phones) => phones?.[0] ?? "-"
+            render: (phones) => phones?.[0]?.number ?? "-"
         },
         {
             title: 'Responsável',
