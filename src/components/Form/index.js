@@ -14,6 +14,20 @@ import Link from 'next/link';
 
 export default function StyledForm({ data, rows, backPath, handleSave, handleChange }) {
 
+    function evaluate(row) {
+        if (data == null) {
+            return "";
+        } else if (row?.value != null) {
+            try {
+                return eval(row.value);
+            } catch (e) {
+                // e
+            }
+        } else {
+            return data[row.name];
+        }
+    }
+
     function renderRows() {
         return (
             <>
@@ -24,16 +38,25 @@ export default function StyledForm({ data, rows, backPath, handleSave, handleCha
                                 <Input
                                     key={`form-input-key-${row.name}`}
                                     placeholder={row.placeholder}
-                                    value={data[row.value ?? row.name]}
+                                    value={evaluate(row)}
                                     onChange={(e) => handleChange(row.name, e.target.value)}
                                 />
                             }
                             {row.type === "switch" &&
                                 <Switch
-                                    key={`form-input-key-${row.name}`}
+                                    key={`form-Switch-key-${row.name}`}
                                     checked={data[row.value ?? row.name]}
                                     onChange={(e) => handleChange(row.name, e)}
                                 />
+                            }
+                            {row.type === "select" && row.items &&
+                                <Select
+                                    key={`form-Select-key-${row.name}`}
+                                    value={data[row.value ?? row.name]}
+                                    onChange={(e) => handleChange(row.name, e)}
+                                >
+                                    {row.items}
+                                </Select>
                             }
                         </Form.Item>
                     )
