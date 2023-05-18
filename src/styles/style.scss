@@ -114,8 +114,8 @@ header {
     margin-top: 60px !important;
     padding: 5px 0 !important;
     background: #e6f7ff !important;
-    border-top: 3px solid #1890ff !important;
-    border-bottom: 3px solid #1890ff !important;
+    border-top: 3px solid #545cad !important;
+    border-bottom: 3px solid #545cad !important;
 
     li {
       background: none !important;
@@ -145,8 +145,8 @@ header {
 .profile-view {
   ul {
     background: #e6f7ff !important;
-    border-top: 3px solid #1890ff;
-    border-bottom: 3px solid #1890ff;
+    border-top: 3px solid #545cad;
+    border-bottom: 3px solid #545cad;
 
     li {
       color: $primary !important;
@@ -1084,7 +1084,7 @@ h1 {
 }
 
 .ant-steps-item-finish>.ant-steps-item-container>.ant-steps-item-tail::after {
-  background-color: #1890ff;
+  background-color: #545cad;
 }
 
 .ant-steps-vertical>.ant-steps-item>.ant-steps-item-container>.ant-steps-item-tail {
