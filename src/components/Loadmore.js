@@ -7,7 +7,7 @@ const fakeDataUrl = `https://randomuser.me/api/?results=${count}&inc=name,gender
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
-function LoadMore({ results }) {
+export default function LoadMore({ results }) {
   const [data, setData] = useState([]);
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -96,5 +96,3 @@ function LoadMore({ results }) {
 
   return (render())
 }
-
-export default LoadMore;

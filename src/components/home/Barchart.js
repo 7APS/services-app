@@ -49,31 +49,31 @@ const data = [
     amt: 2500,
   },
 ];
-class Barchart extends React.Component {
-  static jsfiddleUrl = 'https://jsfiddle.net/alidingling/90v76x08/';
-  render () {
-    const iconName = `/static/images/icon-${this.props.icon}.png `;
-    return (
-      <ResponsiveContainer width="100%" height={300}>
-        <BarChart
-          data={data}
-          margin={{
-            top: 20,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="Produtos" stackId="a" fill="#5984EE" />
-          <Bar dataKey="Serviços" stackId="a" fill="#45CD93" />
-        </BarChart>
-      </ResponsiveContainer>
-    );
-  }
+export default function Barchart() {
+  // const jsfiddleUrl = 'https://jsfiddle.net/alidingling/90v76x08/';
+
+  // const iconName = `/static/images/icon-${this.props.icon}.png `;
+  return (
+    <ResponsiveContainer width="100%" height={300}>
+      <BarChart
+        data={data}
+        margin={{
+          top: 20,
+          right: 30,
+          left: 20,
+          bottom: 5,
+        }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey="Produtos" stackId="a" fill="#5984EE" />
+        <Bar dataKey="Serviços" stackId="a" fill="#45CD93" />
+      </BarChart>
+    </ResponsiveContainer>
+  );
+
 }
-export default Barchart;
+
