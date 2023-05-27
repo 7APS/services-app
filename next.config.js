@@ -1,10 +1,13 @@
 /** @type {import('next').NextConfig} */
 
-const path = require('path');
+// const path = require('path');
 
 module.exports = {
-  sassOptions: {
-    includePaths: [path.join(__dirname, 'styles')],
-    fiber: false,
+  experimental: {
+    appDir: true,
   },
+  // sassOptions: {
+  //   includePaths: [path.join(__dirname, 'styles')],
+  //   fiber: false,
+  // },
 };

@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.ant-menu-item.ant-menu-item-selected {
+    /* Estilos personalizados para o item de menu ativo */
+    background-color: #545cad !important;
+    color: white !important;
+}
