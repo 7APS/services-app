@@ -1,16 +1,14 @@
 import * as React from 'react';
-import {Progress} from 'antd';
-class ProgressBar extends React.Component {
-  render () {
-    return (
-      <Progress
-        type="circle"
-        percent={this.props.number}
-        format={percent => `${percent}%   `}
-        strokeColor={this.props.color}
-        strokeWidth={this.props.width}
-      />
-    );
-  }
+import { Progress } from 'antd';
+
+export default function ProgressBar({number, color, width}) {
+  return (
+    <Progress
+      type="circle"
+      percent={number}
+      format={percent => `${percent}%   `}
+      strokeColor={color}
+      strokeWidth={width}
+    />
+  );
 }
-export default ProgressBar;
