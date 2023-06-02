@@ -1,5 +1,7 @@
 // "use client"
 
+import { Card } from "antd";
+
 // import LoadMore from "@/components/Loadmore"
 
 export default async function Contact() {
@@ -7,10 +9,10 @@ export default async function Contact() {
     // const data = await res.json();
 
     return (
-        <div>
+        <Card>
             <h1>Contatos</h1>
             {/* <LoadMore results={data} /> */}
-        </div>
+        </Card>
     );
 }
 

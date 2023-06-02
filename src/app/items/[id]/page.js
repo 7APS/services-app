@@ -8,11 +8,10 @@ import useSWRMutation from 'swr/mutation'
 
 import StyledForm from '@/components/Form';
 import { baseURL, headerValue, fetcher, sendRequest } from '@/components/Utils'
-import { sleep } from '@/components/Utils';
 
-export default function Person() {
+export default function Person({ params }) {
   const router = useRouter();
-  const { id } = router.query;
+  const { id } = params;
 
   const url = `${baseURL}/items/${id}`;
   let urlMutation = url;

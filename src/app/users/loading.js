@@ -1,13 +1,5 @@
-'use client'
+import DefaultLoading from "@/components/DefaultLoading";
 
-import AppLayout from "@/components/AppLayout";
-import { Skeleton } from "antd";
-
-export default function LoadingUsers() {
-
-    return(
-        <AppLayout>
-            <Skeleton />
-        </AppLayout>
-    )
+export default function Loading() {
+    return <DefaultLoading />
 }

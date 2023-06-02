@@ -52,6 +52,70 @@ export default function AppLayout({ children }) {
         },
     ];
 
+    function getItem(label, key, icon, children) {
+        return {
+            key,
+            icon,
+            children,
+            label,
+        };
+    }
+
+    const MenuItems = [
+        getItem(
+            <Link href="/dashboard" >
+                Dashboard
+            </Link>,
+            '01',
+            <DashboardOutlined />,
+        ),
+        getItem(
+            <Link href="/schedule" >
+                Agenda
+            </Link>,
+            '02',
+            <ScheduleOutlined />,
+        ),
+        getItem(
+            <Link href="/contact" >
+                Mensagens
+            </Link>,
+            '03',
+            <MessageOutlined />,
+        ),
+        getItem('Cadastros', 'sub04', <FormOutlined />, [
+            getItem(
+                <Link href="/users" >
+                    Usuários
+                </Link>,
+                '04',
+                <UserOutlined />,
+            ),
+            getItem(
+                <Link href="/persons" >
+                    Pessoas
+                </Link>,
+                '05',
+                <MessageOutlined />,
+            ),
+            getItem(
+                <Link href="/items" >
+                    Items
+                </Link>,
+                '06',
+                <MessageOutlined />,
+            ),
+            getItem(
+                <Link href="/company" >
+                    Empresa
+                </Link>,
+                '07',
+                <MessageOutlined />,
+            ),
+        ]),
+    ];
+
+
     const handleMenuClick = (e) => {
         console.log('click', e);
         if (e.key === '2') {
@@ -91,39 +155,12 @@ export default function AppLayout({ children }) {
                             <LeftOutlined className="text-sm !text-white hover:!text-warmGray-300" onClick={toggleMenu} />
                         )}
                     </div>
-                    <Menu className='bg-white ' mode="inline" defaultSelectedKeys={[keySelected]}>
-                        <Menu.Item key="1" icon={<DashboardOutlined />}>
-                            <Link href="/dashboard">Dashboard</Link>
-                        </Menu.Item>
-                        <Menu.Item key="2" icon={<ScheduleOutlined />}>
-                            <Link href="/schedule">Agenda</Link>
-                        </Menu.Item>
-                        <Menu.Item key="3" icon={<MessageOutlined />}>
-                            <Link href="/contact">Mensagens</Link>
-                        </Menu.Item>
-                        <SubMenu
-                            key="4"
+                    <Menu
+                        className='bg-white '
+                        mode="inline"
+                        defaultSelectedKeys={[keySelected]}
+                        items={MenuItems}>
 
-                            title={
-                                <span>
-                                    <FormOutlined />
-                                    <span>Cadastros</span>
-                                </span>
-                            }
-                        >
-                            <Menu.Item key="4.1" icon={<UserOutlined />}>
-                                <Link href="/users"> Usuários </Link>
-                            </Menu.Item>
-                            <Menu.Item key="4.2" icon={<UserOutlined />}>
-                                <Link href="/persons"> Pessoas </Link>
-                            </Menu.Item>
-                            <Menu.Item key="4.3" icon={<UserOutlined />}>
-                                <Link href="/items"> Items</Link>
-                            </Menu.Item>
-                            <Menu.Item key="4.4" icon={<UserOutlined />}>
-                                <Link href="/company"> Empresa</Link>
-                            </Menu.Item>
-                        </SubMenu>
                     </Menu>
                 </Sider>
                 <Layout className="bg-gray-100">

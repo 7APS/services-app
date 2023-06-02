@@ -9,9 +9,9 @@ import useSWRMutation from 'swr/mutation'
 import StyledForm from '@/components/Form';
 import { baseURL, headerValue, fetcher, sendRequest } from '@/components/Utils';
 
-export default function Person() {
+export default function Person({ params }) {
   const router = useRouter();
-  const { id } = router.query;
+  const { id } = params;
 
   const url = `${baseURL}/company/${id}`;
   let urlMutation = url;
@@ -20,7 +20,7 @@ export default function Person() {
   }
   const { data, error, isLoading } = useSWR([`${baseURL}/company`, headerValue], fetcher);
   const [newData, setNewData] = useState({});
-  const { trigger, isMutating } = useSWRMutation(urlMutation, sendRequest , /* opções */)
+  const { trigger, isMutating } = useSWRMutation(urlMutation, sendRequest, /* opções */)
 
 
   const [api, contextHolder] = notification.useNotification();
