@@ -23,7 +23,7 @@ const { Header, Sider, Content } = Layout;
 const { SubMenu } = Menu;
 
 import logo from '../../public/images/logoWhite.png';
-import logoMini from '../../public/images/logoMiniBlack.png';
+import logoMini from '../../public/images/logoMiniWhite.png';
 
 export default function AppLayout({ children }) {
     const router = useRouter()

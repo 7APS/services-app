@@ -1,8 +1,7 @@
-// "use client"
+"use client"
 
-import { Card } from "antd";
-
-// import LoadMore from "@/components/Loadmore"
+import { Card, Breadcrumb, Divider } from "antd";
+import LoadMore from "@/components/Loadmore"
 
 export default async function Contact() {
     // const res = await fetch("https://randomuser.me/api/?results=5&inc=name,gender,email,nat&noinfo");
@@ -10,8 +9,32 @@ export default async function Contact() {
 
     return (
         <Card>
-            <h1>Contatos</h1>
-            {/* <LoadMore results={data} /> */}
+            <div className='flex gap-2'>
+                <div className='grid'>
+                    <h1 className='font-bold text-2xl'>Contatos</h1>
+                    <Breadcrumb
+                        items={[
+                            {
+                                title: <a href="/dashboard">Dashboard</a>,
+                            },
+                            {
+                                title: <a href="/contact">Contatos</a>,
+                            }
+                        ]}
+                    />
+                </div>
+                {/* <div className='absolute right-6'>
+                    <Button className='bg-primary text-white h-8'>
+                        <Link href={`/users/new`} legacyBehavior>
+                            <a className='p-4'>
+                                <PlusOutlined /> Adicionar
+                            </a>
+                        </Link>
+                    </Button>
+                </div> */}
+            </div>
+            <Divider />
+            <LoadMore />
         </Card>
     );
 }

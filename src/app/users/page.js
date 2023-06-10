@@ -1,14 +1,15 @@
 'use client'
 
-import { useState } from 'react';
-import { Card, Table, Button } from 'antd';
+import { useState, useEffect } from 'react';
+import { Card, Table, Button, Breadcrumb, Divider, Input } from 'antd';
 import Link from 'next/link';
 import useSWR from 'swr'
 import { baseURL, headerValue, fetcher } from '@/components/Utils'
+import { CheckCircleFilled, CloseCircleFilled, EditOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons';
 
 export default function Users() {
-    const [filteredInfo, setFilteredInfo] = useState({});
-    const [sortedInfo, setSortedInfo] = useState({});
+    const [filteredInfo, setFilteredInfo] = useState("");
+    const [sortedInfo, setSortedInfo] = useState(null);
 
     const { data, error, isLoading } = useSWR([`${baseURL}/users`, headerValue], fetcher);
 
@@ -17,65 +18,110 @@ export default function Users() {
         setSortedInfo(sorter);
     };
 
+    useEffect(() => {
+        if (filteredInfo != null && filteredInfo !== "") {
+            setSortedInfo(data.filter(e => {
+                if (e.name.toUpperCase().search(filteredInfo.toUpperCase()) > -1 || e.email.toUpperCase().search(filteredInfo.toUpperCase()) > -1) {
+                    return e;
+                }
+            }));
+        } else {
+            setSortedInfo(null);
+        }
+    }, [filteredInfo]);
+
     const columns = [
         {
             title: 'Id',
             dataIndex: 'id',
             key: 'id',
             ellipsis: true,
-            width: 25,
+            width: 2,
         },
         {
             title: 'Name',
             dataIndex: 'name',
             key: 'name',
-            // sorter: (a, b) => a.name.length - b.name.length,
-            // sortOrder: sortedInfo.columnKey === 'name' ? sortedInfo.order : null,
             ellipsis: true,
-            width: 25,
+            width: 5,
         },
         {
             title: 'Email',
             dataIndex: 'email',
             key: 'email',
-            // sorter: (a, b) => a.email - b.email,
-            // sortOrder: sortedInfo.columnKey === 'email' ? sortedInfo.order : null,
             ellipsis: true,
-            width: 25,
+            width: 5,
         },
         {
             title: 'Ativo',
             dataIndex: 'active',
             key: 'active',
-            width: 25,
-            render: (active) => active ? "SIM" : "NÃO"
+            width: 2,
+            render: (active) => (
+                active ? <CheckCircleFilled className='text-green-500' /> : <CloseCircleFilled className="text-red-600" />
+            )
         },
         {
-            title: 'Agendamento Ativo',
+            title: 'Agendamento',
             dataIndex: 'professionalAllowsScheduling',
             key: 'professionalAllowsScheduling',
-            width: 25,
-            render: (professionalAllowsScheduling) => professionalAllowsScheduling ? "SIM" : "NÃO"
+            width: 2,
+            render: (professionalAllowsScheduling) => (
+                professionalAllowsScheduling ? <CheckCircleFilled className='text-green-500' /> : <CloseCircleFilled className="text-red-600" />
+            )
         },
         {
-            title: 'Action',
+            title: '',
             key: 'operation',
-            fixed: 'right',
-            width: 25,
-            render: ({ id }) => <a><Link href={`/users/${id}`} legacyBehavior><a>Editar</a></Link></a>,
+            width: 2,
+            render: ({ id }) => <a><Link href={`/users/${id}`} legacyBehavior><a><EditOutlined /></a></Link></a>,
         },
     ];
 
     return (
         <Card>
-            <h1>Usuários</h1>
+            <div className='flex gap-2'>
+                <div className='grid'>
+                    <h1 className='font-bold text-2xl'>Usuários</h1>
+                    <Breadcrumb
+                        items={[
+                            {
+                                title: <a href="/dashboard">Dashboard</a>,
+                            },
+                            {
+                                title: <a href="/users">Usuários</a>,
+                            },
+                            {
+                                title: "Listagem de Usuários",
+                            }
+                        ]}
+                    />
+                </div>
+                <div className='absolute right-6'>
+                    <Button className='bg-primary text-white h-8'>
+                        <Link href={`/users/new`} legacyBehavior>
+                            <a className='p-4'>
+                                <PlusOutlined /> Adicionar
+                            </a>
+                        </Link>
+                    </Button>
+                </div>
+            </div>
+            <Divider />
+            <div className='mb-3 p-2'>
+                <Input
+                    value={filteredInfo}
+                    onChange={(e) => setFilteredInfo(e.target.value)}
+                    placeholder='Pesquise por Nome ou email'
+                    prefix={<SearchOutlined />}
+                />
+            </div>
             <Table
                 columns={columns}
-                dataSource={data}
+                dataSource={sortedInfo ?? data}
                 onChange={handleChange}
                 scroll={{ x: 1500, y: 450, }}
             />
-            <Button><Link href={`/users/new`} legacyBehavior><a>Novo</a></Link></Button>
         </Card>
     );
 }

@@ -2,12 +2,14 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { Card, notification } from 'antd';
+import { Card, notification, Button, Breadcrumb, Divider } from 'antd';
+import Link from 'next/link';
 import useSWR from 'swr'
 import useSWRMutation from 'swr/mutation'
 
 import StyledForm from '@/components/Form';
 import { baseURL, headerValue, fetcher, sendRequest } from '@/components/Utils'
+import { RollbackOutlined, SaveOutlined } from '@ant-design/icons';
 
 export default function Person({ params }) {
   const router = useRouter();
@@ -70,14 +72,46 @@ export default function Person({ params }) {
   return (
     <Card>
       {contextHolder}
-      <h1>Formulário do Pessoa [{newData?.name}]</h1>
+      <div className='flex gap-2'>
+        <div className='grid'>
+          <h1 className='font-bold text-2xl'>Formulário do Pessoa</h1>
+          <Breadcrumb
+            items={[
+              {
+                title: <a href="/dashboard">Dashboard</a>,
+              },
+              {
+                title: <a href="/person">Pessoas</a>,
+              },
+              {
+                title: "Cadastro/Edição de Pessoa",
+              }
+            ]}
+          />
+        </div>
+        <div className='flex absolute right-6 gap-2'>
+          <Button className='hover:bg-primary h-8' onClick={handleSave}>
+            <Link href={`/person`} legacyBehavior>
+              <a className='p-4'>
+                <RollbackOutlined /> Voltar
+              </a>
+            </Link>
+          </Button>
+          <Button className='bg-primary text-white h-8' onClick={handleSave}>
+            <Link href={`/person/new`} legacyBehavior>
+              <a className='p-4'>
+                <SaveOutlined /> Salvar
+              </a>
+            </Link>
+          </Button>
+        </div>
+      </div>
+      <Divider />
       {isLoading || isMutating && <p>Loading...</p>}
       {!newData && id !== "new" && <p>No data...</p>}
       {newData &&
         <StyledForm
           data={newData}
-          backPath="persons"
-          handleSave={handleSave}
           handleChange={handleChange}
           rows={[
             { label: "Nome", type: "input", placeholder: "Nome", name: "name" },
