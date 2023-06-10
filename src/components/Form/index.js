@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
     Button,
-    DatePicker,
     Form,
     Input,
     InputNumber,
-    Radio,
     Select,
     Space,
     Switch,
@@ -30,50 +28,54 @@ export default function StyledForm({ data, rows, backPath, handleSave, handleCha
 
     function renderRows() {
         return (
-            <>
-                {rows.map(row => {
-                    return (
-                        <Form.Item label={row.label}>
-                            {row.type === "input" &&
-                                <Input
-                                    key={`form-input-key-${row.name}`}
-                                    placeholder={row.placeholder}
-                                    value={evaluate(row)}
-                                    onChange={(e) => handleChange(row.name, e.target.value)}
-                                    disabled={row.disabled}
-                                />
-                            }
-                            {row.type === "number" &&
-                                <InputNumber
-                                    key={`form-input-key-${row.name}`}
-                                    placeholder={row.placeholder}
-                                    value={evaluate(row)}
-                                    onChange={(e) => handleChange(row.name, e)}
-                                    disabled={row.disabled}
-                                />
-                            }
-                            {row.type === "switch" &&
-                                <Switch
-                                    key={`form-Switch-key-${row.name}`}
-                                    checked={evaluate(row)}
-                                    onChange={(e) => handleChange(row.name, e)}
-                                    disabled={row.disabled}
-                                />
-                            }
-                            {row.type === "select" && row.items &&
-                                <Select
-                                    key={`form-Select-key-${row.name}`}
-                                    value={evaluate(row)}
-                                    onChange={(e) => handleChange(row.name, e)}
-                                    disabled={row.disabled}
-                                >
-                                    {row.items}
-                                </Select>
-                            }
-                        </Form.Item>
-                    )
-                })}
-            </>
+            <div className=''>
+                <p className='font-bold text-base'>Informações Principais</p>
+                <div className='pl-9'>
+                    {rows.map(row => {
+                        return (
+                            <Form.Item label={row.label}>
+                                {row.type === "input" &&
+                                    <Input
+                                        key={`form-input-key-${row.name}`}
+                                        placeholder={row.placeholder}
+                                        value={evaluate(row)}
+                                        onChange={(e) => handleChange(row.name, e.target.value)}
+                                        disabled={row.disabled}
+                                    />
+                                }
+                                {row.type === "number" &&
+                                    <InputNumber
+                                        className='w-full'
+                                        key={`form-input-key-${row.name}`}
+                                        placeholder={row.placeholder}
+                                        value={evaluate(row)}
+                                        onChange={(e) => handleChange(row.name, e)}
+                                        disabled={row.disabled}
+                                    />
+                                }
+                                {row.type === "switch" &&
+                                    <Switch
+                                        key={`form-Switch-key-${row.name}`}
+                                        checked={evaluate(row)}
+                                        onChange={(e) => handleChange(row.name, e)}
+                                        disabled={row.disabled}
+                                    />
+                                }
+                                {row.type === "select" && row.items &&
+                                    <Select
+                                        key={`form-Select-key-${row.name}`}
+                                        value={evaluate(row)}
+                                        onChange={(e) => handleChange(row.name, e)}
+                                        disabled={row.disabled}
+                                    >
+                                        {row.items}
+                                    </Select>
+                                }
+                            </Form.Item>
+                        )
+                    })}
+                </div>
+            </div>
         )
     }
 
@@ -92,10 +94,12 @@ export default function StyledForm({ data, rows, backPath, handleSave, handleCha
         >
             {renderRows()}
             <Form.Item>
-                <Space>
-                    <Button><Link href={`/${backPath}`} legacyBehavior><a>Voltar</a></Link></Button>
-                    <Button onClick={handleSave}>Salvar</Button>
-                </Space>
+                {backPath && handleSave &&
+                    <Space>
+                        <Button><Link href={`/${backPath}`} legacyBehavior><a>Voltar</a></Link></Button>
+                        <Button onClick={handleSave}>Salvar</Button>
+                    </Space>
+                }
             </Form.Item>
         </Form>
     );

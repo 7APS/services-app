@@ -1,14 +1,15 @@
 'use client'
 
-import { useState } from 'react';
-import { Card, Table, Button } from 'antd';
+import { useState, useEffect } from 'react';
+import { Card, Table, Button, Breadcrumb, Divider, Input } from 'antd';
 import Link from 'next/link';
 import useSWR from 'swr'
 import { baseURL, headerValue, fetcher } from '@/components/Utils'
+import { EditOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons';
 
 export default function Items() {
-    const [filteredInfo, setFilteredInfo] = useState({});
-    const [sortedInfo, setSortedInfo] = useState({});
+    const [filteredInfo, setFilteredInfo] = useState("");
+    const [sortedInfo, setSortedInfo] = useState(null);
 
     const { data, error, isLoading } = useSWR([`${baseURL}/items`, headerValue], fetcher);
 
@@ -17,56 +18,107 @@ export default function Items() {
         setSortedInfo(sorter);
     };
 
+    useEffect(() => {
+        if (filteredInfo != null && filteredInfo !== "") {
+            setSortedInfo(data.filter(e => {
+                if (e.description.toUpperCase().search(filteredInfo.toUpperCase()) > -1 ||
+                    e.type.toUpperCase().search(filteredInfo.toUpperCase()) > -1) {
+                    return e;
+                }
+            }));
+        } else {
+            setSortedInfo(null);
+        }
+    }, [filteredInfo]);
+
     const columns = [
         {
             title: 'Id',
             dataIndex: 'id',
             key: 'id',
             ellipsis: true,
-
+            width: 2,
         },
         {
             title: 'Description',
             dataIndex: 'description',
             key: 'description',
             ellipsis: true,
+            width: 5,
         },
         {
             title: 'Tipo',
             dataIndex: 'type',
             key: 'type',
             ellipsis: true,
+            width: 2,
         },
         {
             title: 'Duração',
             dataIndex: 'duration',
             key: 'duration',
             ellipsis: true,
+            width: 2,
         },
         {
             title: 'Valor',
             dataIndex: 'salesValue',
             key: 'salesValue',
-            render: (salesValue) => `R$ ${salesValue}`
+            render: (salesValue) => `R$ ${salesValue}`,
+            width: 2,
         },
         {
-            title: 'Action',
+            title: '',
             key: 'operation',
-            fixed: 'right',
-            render: ({ id }) => <a><Link href={`/items/${id}`} legacyBehavior><a>Editar</a></Link></a>,
+            width: 2,
+            render: ({ id }) => <a><Link href={`/items/${id}`} legacyBehavior><a><EditOutlined /></a></Link></a>,
         },
     ];
 
     return (
         <Card>
-            <h1>Items</h1>
+            <div className='flex gap-2'>
+                <div className='grid'>
+                    <h1 className='font-bold text-2xl'>Items</h1>
+                    <Breadcrumb
+                        items={[
+                            {
+                                title: <a href="/dashboard">Dashboard</a>,
+                            },
+                            {
+                                title: <a href="/items">Items</a>,
+                            },
+                            {
+                                title: "Listagem de Items",
+                            }
+                        ]}
+                    />
+                </div>
+                <div className='absolute right-6'>
+                    <Button className='bg-primary text-white h-8'>
+                        <Link href={`/items/new`} legacyBehavior>
+                            <a className='p-4'>
+                                <PlusOutlined /> Adicionar
+                            </a>
+                        </Link>
+                    </Button>
+                </div>
+            </div>
+            <Divider />
+            <div className='mb-3 p-2'>
+                <Input
+                    value={filteredInfo}
+                    onChange={(e) => setFilteredInfo(e.target.value)}
+                    placeholder='Pesquise por Descrição ou tipo'
+                    prefix={<SearchOutlined />}
+                />
+            </div>
             <Table
                 columns={columns}
-                dataSource={data}
+                dataSource={sortedInfo ?? data}
                 onChange={handleChange}
-                scroll={{ x: 1500, y: 450, }}
+                scroll={{ x: 1000, y: 650, }}
             />
-            <Button><Link href={`/items/new`} legacyBehavior><a>Novo</a></Link></Button>
         </Card>
     );
 }
