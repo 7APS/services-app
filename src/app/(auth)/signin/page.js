@@ -33,32 +33,7 @@ export default function Signin() {
         });
     };
 
-    const validLogin = () => {
-        let error = false;
-        const { username, password } = formData;
-        if (username == null) {
-            setErrors({ username: "Preencha o email!" })
-            error = true;
-        }
-        if (password == null) {
-            setErrors({ password: "Preencha a senha!" })
-            error = true;
-        }
-        if (password != "12345" || username != "administrador@cloud.com") {
-            setErrors({ username: "Email ou Senha invalido!", password: "Email ou Senha invalido!" })
-            error = true;
-        }
-        if (error === false) {
-            setErrors(null);
-            return true;
-        }
-        return false;
-    };
-
     const handleSubmit = async (e) => {
-        if (!validLogin()) {
-            return;
-        }
         try {
             const response = await fetch('https://spring-boot-webhook-whatsapp.herokuapp.com/api/login', {
                 method: 'POST',
@@ -78,6 +53,11 @@ export default function Signin() {
                 Cookies.set('user', { login: 'true', username: formData.username });
                 router.push('dashboard');
             } else {
+                // console.log("erro>", response);
+                // setErrors({
+                //     username: "Email ou senha invalido!",
+                //     password: "Email ou senha invalido!"
+                // });
                 throw new Error('Erro ao fazer login');
             }
         } catch (error) {
@@ -104,14 +84,14 @@ export default function Signin() {
                                     label="Email"
                                     rules={[{ required: true, message: 'Por favor, insira seu e-mail.' }]}
                                 >
-                                    <Input placeholder="E-mail" value={''} onChange={handleChange} />
+                                    <Input placeholder="E-mail" value={formData.username} onChange={handleChange} />
                                 </Form.Item>
                                 <Form.Item
                                     name="password"
                                     label="Senha"
                                     rules={[{ required: true, message: 'Por favor, insira sua senha.' }]}
                                 >
-                                    <Input.Password placeholder="Senha" value={''} onChange={handleChange} />
+                                    <Input.Password placeholder="Senha" value={formData.password} onChange={handleChange} />
                                 </Form.Item>
                                 <Form.Item>
                                     <Button className='bg-primary' type="primary" htmlType="submit" block>
