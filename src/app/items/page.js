@@ -111,8 +111,9 @@ export default function Items() {
             </div>
             <Table
                 columns={columns}
-                dataSource={sortedInfo ?? data}
+                dataSource={data}
                 onChange={handleChange}
+                pagination={{"hideOnSinglePage": true}}
             />
         </Card>
     );

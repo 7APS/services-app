@@ -113,6 +113,7 @@ export default function Users() {
                 columns={columns}
                 dataSource={sortedInfo ?? data}
                 onChange={handleChange}
+                pagination={{"hideOnSinglePage": true}}
             />
         </Card>
     );

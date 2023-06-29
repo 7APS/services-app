@@ -96,6 +96,7 @@ export default function Company() {
                 columns={columns}
                 dataSource={[sortedInfo ?? data]}
                 onChange={handleChange}
+                pagination={{"hideOnSinglePage": true}}
             />
         </Card>
     );
