@@ -37,6 +37,7 @@ export default function AppLayout({ children }) {
     const handleLogout = () => {
         router.push('/signin');
         Cookies.set('user', null);
+        Cookies.set('token', null);
     };
 
     const items = [
