@@ -33,14 +33,6 @@ export default function Company() {
 
     const columns = [
         {
-            title: 'Id',
-            dataIndex: 'id',
-            key: 'id',
-            ellipsis: true,
-            width: 2,
-
-        },
-        {
             title: 'Nome',
             dataIndex: 'businessName',
             key: 'businessName',
@@ -104,7 +96,6 @@ export default function Company() {
                 columns={columns}
                 dataSource={[sortedInfo ?? data]}
                 onChange={handleChange}
-                scroll={{ x: 1000, y: 650, }}
             />
         </Card>
     );

@@ -33,13 +33,6 @@ export default function Items() {
 
     const columns = [
         {
-            title: 'Id',
-            dataIndex: 'id',
-            key: 'id',
-            ellipsis: true,
-            width: 2,
-        },
-        {
             title: 'Description',
             dataIndex: 'description',
             key: 'description',
@@ -59,18 +52,21 @@ export default function Items() {
             key: 'duration',
             ellipsis: true,
             width: 2,
+            render: (duration) => `${duration} minutos`,
         },
         {
             title: 'Valor',
             dataIndex: 'salesValue',
             key: 'salesValue',
-            render: (salesValue) => `R$ ${salesValue}`,
             width: 2,
+            ellipsis: true,
+            render: (salesValue) => `R$ ${salesValue}`,
         },
         {
             title: '',
             key: 'operation',
             width: 2,
+            ellipsis: true,
             render: ({ id }) => <a><Link href={`/items/${id}`} legacyBehavior><a><EditOutlined /></a></Link></a>,
         },
     ];
@@ -117,7 +113,6 @@ export default function Items() {
                 columns={columns}
                 dataSource={sortedInfo ?? data}
                 onChange={handleChange}
-                scroll={{ x: 1000, y: 650, }}
             />
         </Card>
     );

@@ -32,13 +32,6 @@ export default function Users() {
 
     const columns = [
         {
-            title: 'Id',
-            dataIndex: 'id',
-            key: 'id',
-            ellipsis: true,
-            width: 2,
-        },
-        {
             title: 'Name',
             dataIndex: 'name',
             key: 'name',
@@ -120,7 +113,6 @@ export default function Users() {
                 columns={columns}
                 dataSource={sortedInfo ?? data}
                 onChange={handleChange}
-                scroll={{ x: 1500, y: 450, }}
             />
         </Card>
     );
