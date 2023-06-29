@@ -114,6 +114,7 @@ export default function Items() {
                 dataSource={data}
                 onChange={handleChange}
                 pagination={{"hideOnSinglePage": true}}
+                rowKey={(record) => record.id}
             />
         </Card>
     );

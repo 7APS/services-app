@@ -97,6 +97,7 @@ export default function Company() {
                 dataSource={[sortedInfo ?? data]}
                 onChange={handleChange}
                 pagination={{"hideOnSinglePage": true}}
+                rowKey={(record) => record.id}
             />
         </Card>
     );
