@@ -12,6 +12,7 @@ export default function Users() {
     const [sortedInfo, setSortedInfo] = useState(null);
 
     const { data, error, isLoading } = useSWR([`${baseURL}/users`, headerValue], fetcher);
+    const {content = []} = data ?? {};
 
     const handleChange = (pagination, filters, sorter) => {
         setFilteredInfo(filters);
@@ -20,7 +21,7 @@ export default function Users() {
 
     useEffect(() => {
         if (filteredInfo != null && filteredInfo !== "") {
-            setSortedInfo(data.filter(e => {
+            setSortedInfo(content.filter(e => {
                 if (e.name.toUpperCase().search(filteredInfo.toUpperCase()) > -1 || e.email.toUpperCase().search(filteredInfo.toUpperCase()) > -1) {
                     return e;
                 }
@@ -111,7 +112,7 @@ export default function Users() {
             </div>
             <Table
                 columns={columns}
-                dataSource={sortedInfo ?? data}
+                dataSource={sortedInfo ?? content}
                 onChange={handleChange}
                 pagination={{"hideOnSinglePage": true}}
                 rowKey={(record) => record.id}

@@ -12,6 +12,7 @@ export default function Items() {
     const [sortedInfo, setSortedInfo] = useState(null);
 
     const { data, error, isLoading } = useSWR([`${baseURL}/items`, headerValue], fetcher);
+    const {content = []} = data ?? {};
 
     const handleChange = (pagination, filters, sorter) => {
         setFilteredInfo(filters);
@@ -20,7 +21,7 @@ export default function Items() {
 
     useEffect(() => {
         if (filteredInfo != null && filteredInfo !== "") {
-            setSortedInfo(data.filter(e => {
+            setSortedInfo(content.filter(e => {
                 if (e.description.toUpperCase().search(filteredInfo.toUpperCase()) > -1 ||
                     e.type.toUpperCase().search(filteredInfo.toUpperCase()) > -1) {
                     return e;
@@ -111,7 +112,7 @@ export default function Items() {
             </div>
             <Table
                 columns={columns}
-                dataSource={data}
+                dataSource={sortedInfo ?? content}
                 onChange={handleChange}
                 pagination={{"hideOnSinglePage": true}}
                 rowKey={(record) => record.id}
