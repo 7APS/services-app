@@ -20,12 +20,12 @@ const endDayHour = 21;
 
 export default function ScheduleTeste() {
     const [appointments, setAppointments] = useState(null);
-    const { data, isLoading } = useSWR([`${baseURL}/calendar/events?startEvent>="2023-06-27T05:00:00Z"`, headerValue], fetcher);
-    const { data: userData, isLoading: isLoadingUsers } = useSWR([`${baseURL}/users?professionalAllowsScheduling=true&active=true`, headerValue], fetcher);
+    const { data, isLoading } = useSWR([`${baseURL}/calendar/events`, headerValue], fetcher); //?filter{startEvent->GTE->"2023-06-27T05:00:00Z"}
+    const { data: userData, isLoading: isLoadingUsers } = useSWR([`${baseURL}/users`, headerValue], fetcher); //?filter{professionalAllowsScheduling->EQ->true,active->EQ->true}
 
     useEffect(() => {
         if (!isLoading && !isLoadingUsers && data != null && userData != null) {
-            setAppointments(generateAppointments(data, userData));
+            setAppointments(generateAppointments(data?.content, userData?.content));
         }
     }, [data, userData]);
 
