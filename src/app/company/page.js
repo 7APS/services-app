@@ -12,6 +12,7 @@ export default function Company() {
     const [sortedInfo, setSortedInfo] = useState(null);
 
     const { data, error, isLoading } = useSWR([`${baseURL}/company`, headerValue], fetcher);
+    const {content = []} = data ?? {};
 
     const handleChange = (pagination, filters, sorter) => {
         setFilteredInfo(filters);
@@ -20,7 +21,7 @@ export default function Company() {
 
     useEffect(() => {
         if (filteredInfo != null && filteredInfo !== "") {
-            setSortedInfo(data.filter(e => {
+            setSortedInfo(content.filter(e => {
                 if (e.businessName.toUpperCase().search(filteredInfo.toUpperCase()) > -1 ||
                     e.fantasyName.toUpperCase().search(filteredInfo.toUpperCase()) > -1) {
                     return e;
@@ -32,14 +33,6 @@ export default function Company() {
     }, [filteredInfo]);
 
     const columns = [
-        {
-            title: 'Id',
-            dataIndex: 'id',
-            key: 'id',
-            ellipsis: true,
-            width: 2,
-
-        },
         {
             title: 'Nome',
             dataIndex: 'businessName',
@@ -102,9 +95,10 @@ export default function Company() {
             </div>
             <Table
                 columns={columns}
-                dataSource={[sortedInfo ?? data]}
+                dataSource={[sortedInfo ?? content]}
                 onChange={handleChange}
-                scroll={{ x: 1000, y: 650, }}
+                pagination={{"hideOnSinglePage": true}}
+                rowKey={(record) => record.id}
             />
         </Card>
     );

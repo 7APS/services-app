@@ -12,6 +12,7 @@ export default function Items() {
     const [sortedInfo, setSortedInfo] = useState(null);
 
     const { data, error, isLoading } = useSWR([`${baseURL}/items`, headerValue], fetcher);
+    const {content = []} = data ?? {};
 
     const handleChange = (pagination, filters, sorter) => {
         setFilteredInfo(filters);
@@ -20,7 +21,7 @@ export default function Items() {
 
     useEffect(() => {
         if (filteredInfo != null && filteredInfo !== "") {
-            setSortedInfo(data.filter(e => {
+            setSortedInfo(content.filter(e => {
                 if (e.description.toUpperCase().search(filteredInfo.toUpperCase()) > -1 ||
                     e.type.toUpperCase().search(filteredInfo.toUpperCase()) > -1) {
                     return e;
@@ -32,13 +33,6 @@ export default function Items() {
     }, [filteredInfo]);
 
     const columns = [
-        {
-            title: 'Id',
-            dataIndex: 'id',
-            key: 'id',
-            ellipsis: true,
-            width: 2,
-        },
         {
             title: 'Description',
             dataIndex: 'description',
@@ -59,18 +53,21 @@ export default function Items() {
             key: 'duration',
             ellipsis: true,
             width: 2,
+            render: (duration) => `${duration} minutos`,
         },
         {
             title: 'Valor',
             dataIndex: 'salesValue',
             key: 'salesValue',
-            render: (salesValue) => `R$ ${salesValue}`,
             width: 2,
+            ellipsis: true,
+            render: (salesValue) => `R$ ${salesValue}`,
         },
         {
             title: '',
             key: 'operation',
             width: 2,
+            ellipsis: true,
             render: ({ id }) => <a><Link href={`/items/${id}`} legacyBehavior><a><EditOutlined /></a></Link></a>,
         },
     ];
@@ -115,9 +112,10 @@ export default function Items() {
             </div>
             <Table
                 columns={columns}
-                dataSource={sortedInfo ?? data}
+                dataSource={sortedInfo ?? content}
                 onChange={handleChange}
-                scroll={{ x: 1000, y: 650, }}
+                pagination={{"hideOnSinglePage": true}}
+                rowKey={(record) => record.id}
             />
         </Card>
     );

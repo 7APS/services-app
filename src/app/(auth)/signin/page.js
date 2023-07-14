@@ -49,7 +49,7 @@ export default function Signin() {
             if (response.ok) {
                 const ret = await response.json();
                 Cookies.set('token', ret?.token);
-                localStorage.setItem("token", ret?.token);
+                // localStorage.setItem("token", ret?.token);
                 Cookies.set('user', { login: 'true', username: formData.username });
                 router.push('dashboard');
             } else {

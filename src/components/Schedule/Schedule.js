@@ -1,6 +1,8 @@
-import React from 'react';
-
+import React, { useState, useEffect } from 'react';
+import useSWR from 'swr'
+import { baseURL, headerValue, fetcher } from '@/components/Utils'
 import Scheduler, { Resource, View, Scrolling } from 'devextreme-react/scheduler';
+
 import {
     resources,
     generateAppointments,
@@ -11,19 +13,22 @@ import {
 // import AppointmentTooltip from './AppointmentTooltip.js';
 
 const currentDate = new Date();
-
 const groups = ['humanId'];
 
-const startDay = new Date(2023, 1, 1);
-const endDay = new Date(2024, 1, 1);
 const startDayHour = 8;
 const endDayHour = 21;
 
-// console.log("appointments", appointments);
-
-const appointments = generateAppointments(startDay, endDay, startDayHour, endDayHour);
-
 export default function ScheduleTeste() {
+    const [appointments, setAppointments] = useState(null);
+    const { data, isLoading } = useSWR([`${baseURL}/calendar/events`, headerValue], fetcher); //?filter{startEvent->GTE->"2023-06-27T05:00:00Z"}
+    const { data: userData, isLoading: isLoadingUsers } = useSWR([`${baseURL}/users`, headerValue], fetcher); //?filter{professionalAllowsScheduling->EQ->true,active->EQ->true}
+
+    useEffect(() => {
+        if (!isLoading && !isLoadingUsers && data != null && userData != null) {
+            setAppointments(generateAppointments(data?.content, userData?.content));
+        }
+    }, [data, userData]);
+
     return (
         <Scheduler
             timeZone="America/Sao_Paulo"
@@ -39,7 +44,6 @@ export default function ScheduleTeste() {
             // resourceCellComponent={ResourceCell} // muda a apresentação dos grupos, por exemplo por um avatar ou estilizar a descrição do nome
             showCurrentTimeIndicator={true}
             shadeUntilCurrentTime={true}
-
             // appointmentComponent={Appointment} // os 3 campos abaixo sao para customizar o card na tela o tooltip e o form
             // appointmentTooltipComponent={AppointmentTooltip}
             // onAppointmentFormOpening={this.onAppointmentFormOpening}
