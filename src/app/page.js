@@ -245,8 +245,8 @@ export default function Home() {
         >
           <div className="container mx-auto text-center">
             <p>
-              "Descubra o poder da SOUPE: Sinergia estratégica, usabilidade
-              focada em resultados e produtividade otimizada!"
+              Descubra o poder da SOUPE: Sinergia estratégica, usabilidade
+              focada em resultados e produtividade otimizada!
             </p>
           </div>
         </footer>
