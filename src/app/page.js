@@ -148,24 +148,65 @@ export default function Home() {
           id="sobre"
           className="sobre h-[600px] bg-gray-100 flex items-center justify-center"
         >
-          <div className="">
-            <h1>Sobre</h1>
-            <br />
-            <h2>
-              <b>S</b> - Sinergia
-            </h2>
-            <h2>
-              <b>O</b> - Orientado a resultados
-            </h2>
-            <h2>
-              <b>U</b> - Usabilidade
-            </h2>
-            <h2>
-              <b>P</b> - Produtividade
-            </h2>
-            <h2>
-              <b>E</b> - Estratégico
-            </h2>
+          <div>
+            <div className="flex p-10 gap-6">
+              <br />
+              <h2>
+                <b>S</b> - Sinergia
+              </h2>
+              <h2>
+                <b>O</b> - Orientado a resultados
+              </h2>
+              <h2>
+                <b>U</b> - Usabilidade
+              </h2>
+              <h2>
+                <b>P</b> - Produtividade
+              </h2>
+              <h2>
+                <b>E</b> - Estratégico
+              </h2>
+            </div>
+
+            {/* <div className="w-[50rem] text-center">
+              <p className="p-2">
+                <b>Posicionamento claro:</b>
+                <br /> Comunicar de forma consistente os benefícios da SOUPE,
+                destacando sua sinergia entre funcionalidades, usabilidade
+                intuitiva e o foco em resultados para o cliente.
+              </p>
+              <p className="p-2">
+                <b>Segmentação de mercado:</b>
+                <br /> Identificar setores e empresas que possam se beneficiar
+                diretamente da solução SASS da SOUPE, direcionando esforços de
+                vendas e marketing de forma mais precisa.
+              </p>
+              <p className="p-2">
+                <b>Parcerias estratégicas:</b>
+                <br /> Estabelecer parcerias com empresas complementares, como
+                provedores de serviços relacionados ou consultores
+                especializados, para expandir o alcance e oferecer soluções
+                integradas.
+              </p>
+              <p className="p-2">
+                <b>Demonstração eficaz:</b>
+                <br /> Realizar demonstrações do sistema SOUPE, destacando seus
+                recursos de usabilidade, interface intuitiva e a capacidade de
+                fornecer resultados mensuráveis para os clientes.
+              </p>
+              <p className="p-2">
+                <b>Programas de fidelidade:</b>
+                <br /> Implementar programas de fidelidade para incentivar
+                clientes existentes a continuarem utilizando a SOUPE e promover
+                indicações para novos clientes.
+              </p>
+              <p className="p-2">
+                <b>Suporte excepcional ao cliente:</b>
+                <br /> Oferecer suporte técnico e atendimento ao cliente ágil,
+                eficiente e personalizado, garantindo que os usuários obtenham o
+                máximo valor do sistema.
+              </p>
+            </div> */}
           </div>
         </section>
 
@@ -204,8 +245,8 @@ export default function Home() {
         >
           <div className="container mx-auto text-center">
             <p>
-              Software especializado em resolver o contato do seu cliente com
-              você
+              "Descubra o poder da SOUPE: Sinergia estratégica, usabilidade
+              focada em resultados e produtividade otimizada!"
             </p>
           </div>
         </footer>
