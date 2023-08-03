@@ -12,7 +12,8 @@ module.exports = {
     extend: {},
     colors: {
       ...colors,
-      'primary': '#545cad'
+      'primary': '#545cad',
+      'secondary': '#7d87e8'
     }
   },
   plugins: [],

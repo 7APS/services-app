@@ -92,7 +92,6 @@ export default function StyledForm({ data, rows, backPath, handleSave, handleCha
                 maxWidth: 600,
             }}
         >
-            {renderRows()}
             <Form.Item>
                 {backPath && handleSave &&
                     <Space>
@@ -101,6 +100,7 @@ export default function StyledForm({ data, rows, backPath, handleSave, handleCha
                     </Space>
                 }
             </Form.Item>
+            {renderRows()}
         </Form>
     );
 };
