@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { Button, Card, Breadcrumb, Divider } from 'antd';
+import { Button, Card, Breadcrumb, Divider } from "antd";
 import ScheduleTeste from "@/components/Schedule/Schedule";
 import { PlusOutlined } from "@ant-design/icons";
 
@@ -9,37 +9,37 @@ import { PlusOutlined } from "@ant-design/icons";
 // * https://bryntum.com/products/scheduler/examples/nestedevents/
 
 export default function Schedule() {
-    return (
-        <Card>
-            <div className='flex gap-2'>
-                <div className='grid'>
-                    <h1 className='font-bold text-2xl'>Agenda</h1>
-                    <Breadcrumb
-                        items={[
-                            {
-                                title: <a href="/dashboard">Dashboard</a>,
-                            },
-                            {
-                                title: <a href="/schedule">Agenda</a>,
-                            }
-                        ]}
-                    />
-                </div>
-                <div className='absolute right-6'>
-                    <Button className='bg-primary text-white h-8' disabled>
-                        {/* <Link href={`/users/new`} legacyBehavior> */}
-                        <a className='p-4'>
-                            <PlusOutlined /> Adicionar
-                        </a>
-                        {/* </Link> */}
-                    </Button>
-                </div>
-            </div>
-            <Divider />
-            {/* {renderCalendar()} */}
-            <ScheduleTeste />
-        </Card>
-    );
+  return (
+    <Card>
+      <div className="flex gap-2">
+        <div className="grid">
+          <h1 className="font-bold text-2xl">Agenda</h1>
+          <Breadcrumb
+            items={[
+              {
+                title: <a href="/dashboard">Dashboard</a>,
+              },
+              {
+                title: <a href="/schedule">Agenda</a>,
+              },
+            ]}
+          />
+        </div>
+        <div className="absolute right-6">
+          <Button className="bg-primary text-white h-8" disabled>
+            {/* <Link href={`/users/new`} legacyBehavior> */}
+            <a className="p-4">
+              <PlusOutlined /> Adicionar
+            </a>
+            {/* </Link> */}
+          </Button>
+        </div>
+      </div>
+      <Divider />
+      {/* {renderCalendar()} */}
+      <ScheduleTeste />
+    </Card>
+  );
 }
 
 // const getListData = (value) => {

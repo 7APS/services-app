@@ -1,5 +1,5 @@
 import Script from "next/script";
-const GA_TRACKING_ID = process.env.GA_TRACKING_ID;
+import { GA_TRACKING_ID } from "@/libs/gtag";
 
 const Analytics = () => (
   <>

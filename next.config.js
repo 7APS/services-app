@@ -7,7 +7,7 @@ module.exports = {
     appDir: true,
   },
   env: {
-    GA_TRACKING_ID: "G-W5D1XN9RCD",
+    NEXT_PUBLIC_GA_ID: "G-W5D1XN9RCD",
   },
   // sassOptions: {
   //   includePaths: [path.join(__dirname, 'styles')],
