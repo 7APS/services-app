@@ -1,7 +1,7 @@
-'use client'
+"use client";
 
 import AppLayout from "@/components/AppLayout";
 
 export default function DashLayout({ children }) {
-    return <AppLayout> {children} </AppLayout>;
+  return <AppLayout> {children} </AppLayout>;
 }
