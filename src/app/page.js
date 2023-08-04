@@ -72,7 +72,7 @@ export default function Home() {
               />
             </a>
           </div> */}
-          <ul className="flex space-x-4 text-secondary">
+          <ul className="flex space-x-4 text-secondary xl:space-x-1">
             <li>
               <a
                 href="#home"
@@ -103,7 +103,7 @@ export default function Home() {
                 atuação
               </a>
             </li>
-            <li>
+            <li className="hidden sm:block md:block">
               <a
                 href="#contato"
                 className={`menu-item hover:bg-secondary hover:text-primary font-bold w-28 py-7 px-4 sm:p-7 xl:p-6 h-16
@@ -113,7 +113,7 @@ export default function Home() {
                 contato
               </a>
             </li>
-            <li className="right-3 absolute">
+            <li className="right-3 block sm:absolute md:absolute">
               <a
                 href="/signin"
                 className={`menu-item hover:bg-secondary hover:text-primary font-bold w-28 py-7 px-4 sm:p-7 xl:p-6 h-16
@@ -149,7 +149,7 @@ export default function Home() {
           className="sobre h-[600px] bg-gray-100 flex items-center justify-center"
         >
           <div>
-            <div className="flex p-10 gap-6">
+            <div className="p-10 gap-6">
               <br />
               <h2>
                 <b>S</b> - Sinergia
